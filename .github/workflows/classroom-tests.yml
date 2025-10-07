@@ -1,0 +1,54 @@
+name: Classroom Autograding (Week 2 DOM)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci || npm install
+      - run: npx playwright install --with-deps
+      - run: npm run test:json
+      - run: npm run test:html
+      - name: Grade (integer, exclude 0p specs)
+        run: |
+          node -e "
+          const fs = require('fs');
+          const ZERO = [/t1_external_css/i, /t8_no_frameworks/i];
+          let passed=0,total=0;
+          function zero(name=''){ return ZERO.some(rx=>rx.test(name)); }
+          function walk(s){ if(!s)return;
+            (s.suites||[]).forEach(walk);
+            (s.specs||[]).forEach(spec=>{
+              const file=(spec.file||'').split('/').pop();
+              if(zero(file)) return;
+              total+=1;
+              const r=spec.tests?.[0]?.results?.[0];
+              if(r?.status==='passed') passed+=1;
+            });
+          }
+          try{
+            const data=JSON.parse(fs.readFileSync('results.json','utf8'));
+            (data.suites||[]).forEach(walk);
+          }catch(e){ console.error(e); }
+          const score = total>0 ? Math.round((passed/total)*10) : 0;
+          const summary={score, max_score:10, info:{passed,total,excluded:ZERO.map(x=>x.toString())}};
+          fs.writeFileSync('score.json', JSON.stringify(summary,null,2));
+          console.log(summary);
+          "
+      - uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+      - uses: actions/upload-artifact@v4
+        with:
+          name: autograding-results
+          path: |
+            results.json
+            score.json

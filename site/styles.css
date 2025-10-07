@@ -1,0 +1,344 @@
+:root {
+    --background-color: #0c0c0b; 
+    --body-color: #201e1d;    
+    --highlight: #292724;       
+    --highlight2: #3a3733;       
+
+    --color-text: #f0e6dc; 
+
+    --color-accent: #d68c5a;
+    --color-accent-hover: rgb(199, 111, 62); 
+    --space: 1rem;
+
+    --border-rad: 15px;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+
+    width: 75%;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+    color: var(--color-text);
+
+    border-right: 2px solid var(--color-accent);
+    border-left: 2px solid var(--color-accent);
+    padding: var(--space);
+    background: var(--body-color);
+}
+
+.nav-link,
+.btn,
+.card {
+    transition: 125ms ease-in-out;
+}
+
+html {
+    font-size: 16px;
+    background-color: var(--background-color);
+}
+
+@media (max-width: 800px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    header nav {
+        flex: unset;
+        width: 100%;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .nav-link {
+        flex: unset;
+        text-align: left;
+        padding: 0.5rem 0.25rem;
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space);
+    gap: var(--space);
+    margin-bottom: var(--space);
+    border-bottom: 2px solid var(--highlight2);
+}
+
+header h1 {
+    font-size: 32px;
+}
+
+header nav {
+    flex: 1;
+}
+
+
+.nav {
+    display: flex;
+    width: 100%;
+    gap: var(--space);
+}
+
+.nav-link {
+    flex: 1;
+    text-align: center;
+    padding: var(--space);
+    text-decoration: none;
+    color: var(--color-text);
+    border: 1px solid #ccc;
+    border-radius: var(--border-rad);
+    background: var(--highlight);
+}
+
+.nav-link:hover {
+    background: var(--color-accent-hover);
+    border: 1px solid var(--color-accent);
+    transform: scale(1.075);
+}
+
+.nav-link:active {
+    flex: 1;
+    text-align: center;
+    padding: var(--space);
+    text-decoration: none;
+    color: var(--color-text);
+    border: 1px solid #ccc;
+    transform: scale(0.925);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 550px;
+}
+
+th,
+td {
+    border: 1px solid var(--color-accent);
+    padding: 0.5rem;
+    text-align: center;
+}
+
+h1,
+h2,
+h3,
+p {
+    line-height: 1.4;
+    margin: 0 0 calc(var(--space) * .75);
+    text-align: center;
+}
+
+.title {
+    color: var(--color-text);
+}
+
+.title.strong {
+    color: var(--color-accent);
+}
+
+
+a {
+    text-decoration: underline;
+    color: var(--color-accent);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space);
+    gap: 20%;
+    margin-top: var(--space);
+    border-top: 2px solid var(--highlight2);
+}
+
+img {
+    border-radius: 5px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    margin-bottom: 50px;
+}
+
+@media (min-width: 800px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1280px) {
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 5px;
+    max-width: 350px;
+    max-height: 250px;
+
+    border-radius: var(--border-rad);
+}
+.card > img{
+    width: 100%;
+    height: fit-content; 
+    object-fit: cover;
+    border-radius: var(--border-rad);
+    margin-bottom: var(--space);
+}
+.card .price {
+    color: var(--color-accent);     
+    font-weight: bold;      
+}
+.card:hover .price {
+    color: var(--color-text);     
+    font-weight: bold;      
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    transform: scale(1.025);
+}
+.card:hover img + .card-content {
+    background: var(--color-accent-hover);
+}
+.card:hover .card-title::before {
+    color: var(--color-text)
+}
+
+img + .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space);
+    background: var(--highlight);
+    border-radius: 0 0 var(--border-rad) var(--border-rad);
+    margin-top: -25px;
+}
+
+.card-title{
+    position: relative;
+}
+.card-title::before{
+    content:"";
+}
+.card-title.new::before{
+    content:"Uutuus! ";
+    color: var(--color-accent)
+}
+
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #363636;
+    border-radius: 5px;
+    background-color: var(--highlight);
+    color: #f0e6dc;
+    outline: none;
+    resize: vertical; 
+}
+.product-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.product-options > div {
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #d68c5a; /* coffee accent */
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
+}
+
+form {
+    background-color: var(--body-color);  
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+form button{
+    flex: 1;
+    text-align: center;
+    padding: var(--space);
+    text-decoration: none;
+    color: var(--color-text);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: var(--highlight);
+    width: 30%;
+    margin-inline: auto;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.highlight {
+  outline: 2px solid #c33;
+}
+.hidden {
+  display: none !important;
+}
+.alert {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
