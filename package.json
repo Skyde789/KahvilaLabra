@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "http-server ./site -p 5173 -c-1",
+    "start": "http-server -p 5173 -c-1",
     "test": "playwright test",
     "test:json": "playwright test --reporter=json > results.json || true",
     "test:html": "playwright test --reporter=html || true"
