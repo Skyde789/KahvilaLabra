@@ -9,7 +9,7 @@ function TeeYhteenveto(a,b){
 
 console.log(TeeYhteenveto(productName, productPrice));
 
-const title = document.querySelector('header h1');
+const title = document.querySelector('main h1');
 if (title) {
   const date = new Date().toLocaleDateString('fi-FI');
   title.textContent = `${title.textContent} – ${date}`;
@@ -49,23 +49,22 @@ korostaBtn?.addEventListener('click', () => {
   }
 });
 
-// Valitaan lomake
-const form = document.querySelector('form.center'); // lomake, jolla luokka "center"
+
+const form = document.querySelector('form.center'); 
 if (form) {
-  // Luodaan paikka viestille
   const msg = document.createElement('p');
   form.prepend(msg);
 
   form.addEventListener('submit', (e) => {
-    e.preventDefault(); // estetään lomakkeen oletustoiminto
+    e.preventDefault(); 
 
     const virheet = [];
 
-    // Nimi tarkistus
+
     const nimi = form.querySelector('input[name="name"]')?.value.trim();
     if (!nimi) virheet.push('Nimi puuttuu');
 
-    // Sähköposti tarkistus
+
     const email = form.querySelector('input[name="email"]')?.value.trim();
     if (!email) {
       virheet.push('Sähköposti puuttuu');
@@ -73,11 +72,10 @@ if (form) {
       virheet.push('Sähköposti ei kelpaa');
     }
 
-    // Tuotteiden valinta tarkistus
+
     const tuotteet = form.querySelectorAll('input[name="product[]"]:checked');
     if (tuotteet.length === 0) virheet.push('Valitse vähintään yksi tuote');
 
-    // Viestien näyttäminen
     if (virheet.length) {
       msg.textContent = 'Tarkista lomake: ' + virheet.join(', ');
       msg.className = 'alert';
