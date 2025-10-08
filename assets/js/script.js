@@ -18,7 +18,7 @@ function TeeYhteenveto(a, b) {
 
 console.log(TeeYhteenveto(productName, productPrice));
 
-const title = document.querySelector('header h1');
+const title = document.querySelector('main h1');
 if (title) {
   const date = new Date().toLocaleDateString('fi-FI');
   title.textContent = `${title.textContent} – ${date}`;
@@ -66,11 +66,14 @@ if (form) {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault(); 
+    e.preventDefault(); 
 
     const virheet = [];
 
+
     const nimi = form.querySelector('input[name="name"]')?.value.trim();
     if (!nimi) virheet.push('Nimi puuttuu');
+
 
     const email = form.querySelector('input[name="email"]')?.value.trim();
     if (!email) {
@@ -78,6 +81,7 @@ if (form) {
     } else if (!email.includes('@')) {
       virheet.push('Sähköposti ei kelpaa');
     }
+
 
     const tuotteet = form.querySelectorAll('input[name="product[]"]:checked');
     if (tuotteet.length === 0) virheet.push('Valitse vähintään yksi tuote');
